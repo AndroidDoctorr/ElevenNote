@@ -22,18 +22,22 @@ namespace ElevenNote.WebMVC.Controllers
         public async Task<ActionResult> Create()
         {
             ViewBag.Title = "Create";
-            List<SelectListItem> li = new List<SelectListItem>();
+            ViewBag.RandomMessageThing = "Hello!!";
+            List<SelectListItem> list = new List<SelectListItem>();
             var service = new CategoryService();
-            List<Category> Categories = (await service.GetCategories()).ToList();
-            var query = from c in Categories
-                        select new SelectListItem()
-                        {
-                            Value = c.CategoryId.ToString(),
-                            Text = c.Name
-                        };
-            li = query.ToList();
-            ViewBag.CategoryId = li;
-            return View();
+            IEnumerable<Category> Categories = (await service.GetCategories());
+            var selectList = Categories.Select(c => new SelectListItem()
+            {
+                Value=c.CategoryId.ToString(),
+                Text = c.Name
+            }).ToList();
+            // SelectList sl = (SelectList) selectList;
+            // ViewBag.CategoryList = selectList;
+            NoteCreate newNote = new NoteCreate()
+            {
+                Categories = selectList
+            };
+            return View(newNote);
         }
 
         [HttpPost]

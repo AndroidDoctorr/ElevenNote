@@ -34,6 +34,7 @@ namespace ElevenNote.Services
                     Content = model.Content,
                     CreatedUtc = DateTimeOffset.Now,
                     Status = model.Status,
+
                     CategoryId = id
                 };
 
@@ -57,6 +58,7 @@ namespace ElevenNote.Services
                                     NoteId = e.NoteId,
                                     Title = e.Title,
                                     CreatedUtc = e.CreatedUtc,
+                                    IsStarred = e.IsStarred,
                                     Status = e.Status
                                 }
                         );
@@ -101,6 +103,7 @@ namespace ElevenNote.Services
                 entity.Status = model.Status;
                 entity.Content = model.Content;
                 entity.ModifiedUtc = DateTimeOffset.UtcNow;
+                entity.IsStarred = model.IsStarred;
 
                 return ctx.SaveChanges() == 1;
             }

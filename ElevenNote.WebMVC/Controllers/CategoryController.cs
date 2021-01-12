@@ -4,6 +4,7 @@ using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -12,9 +13,9 @@ namespace ElevenNote.WebMVC.Controllers
     public class CategoryController : Controller
     {
         // GET: Category
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            return View((new CategoryService()).GetCategoryList());
+            return View(await (new CategoryService()).GetCategoryList());
         }
         // GET: Create
         public ActionResult Create()

@@ -32,6 +32,9 @@
         <th>
             @Html.DisplayNameFor(model => model.Status)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsStarred)
+        </th>
         <th></th>
     </tr>
 
@@ -51,6 +54,9 @@
                 @Html.DisplayFor(modelItem => item.Status)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.IsStarred, new { Id = item.NoteId })
+            </td>
+            <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.NoteId }) |
                 @Html.ActionLink("Details", "Details", new { id = item.NoteId }) |
                 @Html.ActionLink("Delete", "Delete", new { id = item.NoteId })
@@ -59,3 +65,30 @@
     }
 
 </table>
+
+@section scripts {
+    <script language="javascript" type="text/javascript">
+        $(document).ready(function () {
+            $("i[data-toggle='star']")
+                .css({ "cursor": "pointer" })
+                .click(function (e) {
+                    var target = $(e.target);
+                    var noteId = target.attr("data-id");
+                    var starSet = target.hasClass("fa-star");
+
+                    $.ajax({
+                        method: starSet ? "DELETE" : "PUT",
+                        url: "/api/note/" + noteId + "/star",
+                        data: null
+                    })
+                        .done(function (r) {
+                            target.removeClass();
+                            target.addClass(starSet ? "fa fa-star-o text-dark" : "fa fa-star gold");
+                        })
+                        .fail(function (r) {
+                            alert("Failed to change star status");
+                        });
+                });
+        });
+    </script>
+}
