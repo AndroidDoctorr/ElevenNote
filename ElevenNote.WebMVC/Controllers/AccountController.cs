@@ -453,50 +453,6 @@ namespace ElevenNote.WebMVC.Controllers
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         public ActionResult Index()
         {
             var userService = new UserService();
@@ -654,26 +610,6 @@ namespace ElevenNote.WebMVC.Controllers
             };
             return View(userDetailModel);
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

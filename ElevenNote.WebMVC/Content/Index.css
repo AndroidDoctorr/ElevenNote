@@ -1,0 +1,33 @@
+﻿.efa-red {
+    background-color: #e33e42;
+}
+
+.gold {
+    color: gold;
+}
+
+.nav-link > a {
+    color: white;
+}
+
+    .nav-link > a:hover {
+        color: cornflowerblue;
+        text-decoration: none;
+    }
+
+body {
+    color: white;
+}
+
+
+.thing {
+    background-color: red !important;
+}
+
+div.thing {
+    background-color: blue;
+}
+
+<a class="thing"> <- red
+
+<div class="thing"> <- red
