@@ -1,13 +1,14 @@
-namespace ElevenNote.Data.Migrations
+﻿namespace ElevenNote.Data.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class addedCategoryBack : DbMigration
+    public partial class test : DbMigration
     {
         public override void Up()
         {
             AddColumn("dbo.Note", "CategoryId", c => c.Int(nullable: false));
+            AddColumn("dbo.Note", "IsStarred", c => c.Boolean(nullable: false));
             CreateIndex("dbo.Note", "CategoryId");
             AddForeignKey("dbo.Note", "CategoryId", "dbo.Category", "CategoryId", cascadeDelete: true);
         }
@@ -16,6 +17,7 @@ namespace ElevenNote.Data.Migrations
         {
             DropForeignKey("dbo.Note", "CategoryId", "dbo.Category");
             DropIndex("dbo.Note", new[] { "CategoryId" });
+            DropColumn("dbo.Note", "IsStarred");
             DropColumn("dbo.Note", "CategoryId");
         }
     }
